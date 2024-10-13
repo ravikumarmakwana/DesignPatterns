@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns.Structural.Observer
+﻿namespace DesignPatterns.Behavioral.Observer
 {
     public class Customer : ISubscriber
     {

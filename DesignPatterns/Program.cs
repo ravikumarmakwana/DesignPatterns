@@ -1,4 +1,4 @@
-﻿using DesignPatterns.Structural.Observer;
+﻿using DesignPatterns.Behavioral.Observer;
 
 public class Program
 {
