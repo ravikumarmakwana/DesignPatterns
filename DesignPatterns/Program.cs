@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Behavioral.Observer;
+using DesignPatterns.Behavioral.Strategy;
 
 public class Program
 {
@@ -90,31 +91,48 @@ public class Program
         //homeTheater.EndMovie();
 
 
-        Customer customer1 = new Customer() { Name = "Customer 1" };
-        Customer customer2 = new Customer() { Name = "Customer 2" };
-        Customer customer3 = new Customer() { Name = "Customer 3" };
-        Customer customer4 = new Customer() { Name = "Customer 4" };
+        //Customer customer1 = new Customer() { Name = "Customer 1" };
+        //Customer customer2 = new Customer() { Name = "Customer 2" };
+        //Customer customer3 = new Customer() { Name = "Customer 3" };
+        //Customer customer4 = new Customer() { Name = "Customer 4" };
 
-        Product product1 = new Product("iPhone", 160000);
-        Product product2 = new Product("Samsung Galaxy Fold 6", 200000);
+        //Product product1 = new Product("iPhone", 160000);
+        //Product product2 = new Product("Samsung Galaxy Fold 6", 200000);
 
-        product1.Subscribe(customer1);
-        product1.Subscribe(customer2);
-        product1.Subscribe(customer3);
+        //product1.Subscribe(customer1);
+        //product1.Subscribe(customer2);
+        //product1.Subscribe(customer3);
 
-        product2.Subscribe(customer2);
-        product2.Subscribe(customer3);
+        //product2.Subscribe(customer2);
+        //product2.Subscribe(customer3);
 
-        product1.Price -= 5000;
-        
-        Console.WriteLine();
-        product2.Price += 5000;
+        //product1.Price -= 5000;
 
-        product1.Unsubscribe(customer2);
-        product1.Unsubscribe(customer3);
+        //Console.WriteLine();
+        //product2.Price += 5000;
 
-        product1.Subscribe(customer4);
-        Console.WriteLine();
-        product1.Price -= 40000;
+        //product1.Unsubscribe(customer2);
+        //product1.Unsubscribe(customer3);
+
+        //product1.Subscribe(customer4);
+        //Console.WriteLine();
+        //product1.Price -= 40000;
+
+        CashOnDeliveryPayment cashOnDeliveryPayment = new();
+        CreditCardPayment creditCardPayment = new("1234 1212 1212 1212");
+        GooglePayPayment googlePayPayment = new("googlepay@google.com");
+
+        ShopingCart cart = new ShopingCart();
+
+        cart.Checkout(100);
+
+        cart.SetPaymentStrategy(googlePayPayment);
+        cart.Checkout(500);
+
+        cart.SetPaymentStrategy(cashOnDeliveryPayment);
+        cart.Checkout(50000);
+
+        cart.SetPaymentStrategy(creditCardPayment);
+        cart.Checkout(40);
     }
 }
