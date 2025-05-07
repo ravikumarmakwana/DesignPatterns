@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Behavioral.Observer;
+﻿using DesignPatterns.Behavioral.Command;
+using DesignPatterns.Behavioral.Observer;
 using DesignPatterns.Behavioral.Strategy;
 
 public class Program
@@ -118,21 +119,34 @@ public class Program
         //Console.WriteLine();
         //product1.Price -= 40000;
 
-        CashOnDeliveryPayment cashOnDeliveryPayment = new();
-        CreditCardPayment creditCardPayment = new("1234 1212 1212 1212");
-        GooglePayPayment googlePayPayment = new("googlepay@google.com");
+        //CashOnDeliveryPayment cashOnDeliveryPayment = new();
+        //CreditCardPayment creditCardPayment = new("1234 1212 1212 1212");
+        //GooglePayPayment googlePayPayment = new("googlepay@google.com");
 
-        ShopingCart cart = new ShopingCart();
+        //ShopingCart cart = new ShopingCart();
 
-        cart.Checkout(100);
+        //cart.Checkout(100);
 
-        cart.SetPaymentStrategy(googlePayPayment);
-        cart.Checkout(500);
+        //cart.SetPaymentStrategy(googlePayPayment);
+        //cart.Checkout(500);
 
-        cart.SetPaymentStrategy(cashOnDeliveryPayment);
-        cart.Checkout(50000);
+        //cart.SetPaymentStrategy(cashOnDeliveryPayment);
+        //cart.Checkout(50000);
 
-        cart.SetPaymentStrategy(creditCardPayment);
-        cart.Checkout(40);
+        //cart.SetPaymentStrategy(creditCardPayment);
+        //cart.Checkout(40);
+
+        Light light = new Light();
+
+        ICommand turnOn = new TurnOnCommand(light);
+        ICommand turnOff = new TurnOffCommand(light);
+
+        RemoteControl remoteControl = new RemoteControl();
+
+        remoteControl.SetCommand(turnOn);
+        remoteControl.Execute();
+
+        remoteControl.SetCommand(turnOff);
+        remoteControl.Execute();
     }
 }
