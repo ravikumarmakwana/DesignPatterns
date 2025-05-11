@@ -1,6 +1,8 @@
-﻿using DesignPatterns.Behavioral.Command;
+﻿using DesignPatterns.Behavioral.ChainOfResponsibility;
+using DesignPatterns.Behavioral.Command;
 using DesignPatterns.Behavioral.Observer;
 using DesignPatterns.Behavioral.Strategy;
+using DesignPatterns.Structural.Composite;
 
 public class Program
 {
@@ -136,17 +138,44 @@ public class Program
         //cart.SetPaymentStrategy(creditCardPayment);
         //cart.Checkout(40);
 
-        Light light = new Light();
+        //Light light = new Light();
 
-        ICommand turnOn = new TurnOnCommand(light);
-        ICommand turnOff = new TurnOffCommand(light);
+        //ICommand turnOn = new TurnOnCommand(light);
+        //ICommand turnOff = new TurnOffCommand(light);
 
-        RemoteControl remoteControl = new RemoteControl();
+        //RemoteControl remoteControl = new RemoteControl();
 
-        remoteControl.SetCommand(turnOn);
-        remoteControl.Execute();
+        //remoteControl.SetCommand(turnOn);
+        //remoteControl.Execute();
 
-        remoteControl.SetCommand(turnOff);
-        remoteControl.Execute();
+        //remoteControl.SetCommand(turnOff);
+        //remoteControl.Execute();
+
+
+        //IFileSystemItem file1 = new DesignPatterns.Structural.Composite.File("File 1.txt");
+        //IFileSystemItem file2 = new DesignPatterns.Structural.Composite.File("File 2.txt");
+        //IFileSystemItem file3 = new DesignPatterns.Structural.Composite.File("File 3.txt");
+        //IFileSystemItem file4 = new DesignPatterns.Structural.Composite.File("File 4.txt");
+
+        //Folder mainFolder = new DesignPatterns.Structural.Composite.Folder("Main Folder");
+        //Folder subFolder = new DesignPatterns.Structural.Composite.Folder("Sub Folder");
+
+        //mainFolder.Add(file1);
+        //mainFolder.Add(file2);
+        //mainFolder.Add(subFolder);
+
+        //subFolder.Add(file3);
+        //subFolder.Add(file4);
+
+        //mainFolder.Display();
+
+        EmailMiddleware emailMiddleware = new EmailMiddleware();
+        SMSMiddleware sMSMiddleware = new SMSMiddleware();
+        LogMiddleware logMiddleware = new LogMiddleware();
+
+        logMiddleware.SetNext(sMSMiddleware);
+        sMSMiddleware.SetNext(emailMiddleware);
+
+        logMiddleware.Invoke("Hello World!");
     }
 }
